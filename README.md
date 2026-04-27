@@ -1,46 +1,79 @@
-# Netflix-Post-Price-Analysis-project-
- 
-Many of Netflix's users have been upset about the price increase for their subscriptions. This summary will explore whether customers cancelled their plan after the price went up, which group of customers was most affected, and whether further cancellations are expected in the future.  The analysis in this report is intended to support business decisions around customer retention, pricing strategy, and subscriber engagement. The key question that needs to be answered is how the Netflix subscription price increase impacts subscriber retention and engagement through different customer groups, and whether customers will cancel their plans in the future due to an increase
+This project evaluates the impact of Netflix’s 2024 price increases on user behavior and financial stability. By analyzing a dataset of 25,000+ records. I transitioned from descriptive reporting to predictive analysis, identifying which demographic segments were most resilient and building a data warehouse architecture to support long-term business intelligence
+
+Core Question: How did the Netflix subscription price increase impact subscriber retention and engagement across different customer groups — and will customers continue to cancel in the future?
+
+`[Live Interactive Dashboard](https://public.tableau.com/app/profile/tyrese.dieudonne/viz/NetflixPostPriceIncreaseanalysis/Dashboard1?publish=yes)
+<img width="1489" height="828" alt="Screenshot 2026-04-27 at 2 56 40 AM" src="https://github.com/user-attachments/assets/edf505c8-c0e0-4fbc-8711-6ca021814b69" />
 
 
-The data used in the analysis comprises 25,000 records of Netflix customers from 2024 to 2025. Each record represents one customer and includes information such as their age and country, which subscription plan they have, how many hours of content they watched, and login activity. 
+## 🗂️ Table of Contents
 
-To analyze Netflix data effectively, it was organized into a structured database that allowed for fast, accurate querying and reporting. The raw data was cleaned and sorted into logical categories such as customer profiles, subscription plans, geographic regions, dates, and price change events. Once the data was organized, we presented a dashboard to visualize what was dealt with the data and report the findings and solutions. 
+- [Data Architecture](#data-architecture--warehouse-design)
+- [Excel Data Analysis](#excel-data-analysis)
+- [SQL Analysis](#sql-analysis)
+- [Dashboard & Findings](#dashboard--key-findings)
+- [Recommendations](#recommendations-for-netflix)
 
 
-Data Architecture & Warehouse Design
-I designed a scalable Star Schema to ensure data integrity and query performance.
+## 📂 Dataset
+The dataset used for this analysis is located in the [/data](data/) folder. 
+* **Source:** Raw subscription logs containing 25,000+ records.
+* **Fields:** User ID, Subscription Type, Monthly Revenue, Watch Time, and Churn Status.
+  <img width="705" height="578" alt="Screenshot 2026-04-25 at 12 02 11 PM" src="https://github.com/user-attachments/assets/d3e25006-c99b-43e8-bbec-0291ef9b9e73" />
 
-The Grain: One record per subscriber per billing cycle.
 
-Schema Design:
+🏗️ Data Architecture & Warehouse Design
+To analyze Netflix data effectively, the raw data was cleaned, structured, and organized into a Star Schema optimized for fast querying and accurate reporting.
+Schema Design
 
-Fact Table: Fact_Engagement (Revenue, Hours Watched, Churn Status).
+Grain — One record per subscriber per billing cycle
+Fact Table — Fact_Engagement (Revenue, Hours Watched, Churn Status)
+Dimension Tables — Dim_User (Age, Region), Dim_Plan (Tier, Price), Dim_Date
+Integrity — Primary and Foreign Keys enforce referential integrity across all tables
 
-Dimension Tables: Dim_User (Age, Region), Dim_Plan (Tier, Price), Dim_Date.
+The star schema ensured that every query — whether filtering by age group, subscription tier, or time period — ran efficiently without redundant data across tables.
 
-Relationships: Enforced referential integrity using Primary and Foreign Keys to connect dimensions to the central fact table.
+## 🧠 Data Mining & Predictive Modeling
+To move beyond descriptive reporting, I implemented a **classification logic** to predict user churn.
+* **Objective:** Predict the likelihood of a user canceling their subscription based on post-increase behavior.
+* **Features Used:** * `Avg_Content_Hours`: Lower engagement is a primary indicator of churn.
+  * `Plan_Type`: Analyzing if "Basic" users are more price-sensitive than "Premium" users.
+  * `Age_Segment`: Identifying generational loyalty trends.
+* **Methodology:** Utilized **Logistic Regression** to calculate churn probability scores, identifying a high-risk segment among users with <200 monthly hours.
 
-🛠️ ETL Pipeline (Extract, Transform, Load)
-Extraction: Processed raw datasets containing subscription logs and user activity.
+  ### **The ETL Pipeline (Extract, Transform, Load)**
+1. **Extraction:** Ingested raw subscription logs and engagement metrics via SQL.
+2. **Transformation:**
+   * **Data Cleaning:** Handled null values in demographic fields and removed duplicate entries.
+   * **Calculated Fields:** Derived `Avg_Content_Hours` and `Revenue_per_User` using SQL aggregates.
+   * **Bucketing:** Categorized raw ages into discrete segments (e.g., 18-24, 25-34) for clearer visualization.
+3. **Loading:** Exported optimized datasets into Tableau for final visualization and trend analysis.
 
-Transformation (SQL): * Used SQL for data cleaning, including handling NULL values and removing duplicate user IDs.
+Key Visualizations & Insights
+Standard Tier Dominance: While the "Standard" plan holds the highest total watch time (8M+ hours), the "Premium" tier showed the highest resilience to price hikes.
 
-Performed data type casting and created calculated fields for "Average Content Hours."
+Demographic Stability: The 35-44 age segment remains the most engaged, maintaining >500 hours/month despite cost increases.
 
-Aggregated demographic segments to normalize skewed age data.
+### 🗄️ Phase 2: SQL Transformation (ETL)
+Using SQL, I moved the cleaned data into the warehouse and validated the business logic.
+* **Extraction:** Ingested raw logs into a PostgreSQL environment.
+* **Transformation:** * Casted data types for financial accuracy.
+    * Aggregated demographic segments to normalize skewed age data.
+* **Validation:** Cross-checked SQL aggregates against raw totals to confirm **100% data accuracy** prior to visualization.
 
-Validation: Conducted data auditing to ensure dashboard totals matched raw SQL aggregates with 100% accuracy.
 
-Key finding 
-1. Customers who stayed did not watch less. 
-After the price increase, the average number of hours watched per month remained the same, around 500 hours. Despite customers being upset, the subscribers who decided to stay with Netflix did not reduce their usage. They continued watching at the same rate as before the price increase. This signifies a strong signal of loyalty among retained customers. 
+📈 Key Findings & Business Insights
+Engagement Resilience: Subscribers who stayed did not reduce their usage; Average Content Hours remained stable at ~500 hours/month, signaling high brand value.
 
-2. The Younger and Middle-Aged Customers are the Most Loyal
-Analyzing the engagement by age group reveals that customers between 35 and 44 years old watched the most content after the price increase, making them the most engaged and loyal segment. Customers between 45-54 showed the lowest engagement levels, which suggests they are at the greatest risk of canceling their plan. 
+Loyalty Leaders: The 35–44 age segment emerged as the most loyal and highly engaged group.
 
-3. Revenue has stabilized- No Further Drop Expected 
-Monthly revenue grew through mid 2024, reaching a peak at the end of 2024, before declining to $47,816 by early 2025  as some customers cancelled following the price increase.  Since then, the revenue has stabilized at that level. The forecast model projects revenue remaining
+At-Risk Segment: The 45–54 age group showed the lowest engagement post-increase, representing the highest churn risk for future cycles.
 
- The Netflix price increase did lead to some customer cancellations, visible in the revenue decline in early 2025. However, the customers who remained are highly engaged and show no signs of reducing their usage. Forecast modeling confirms that the platform has stabilized and has no significant additional subscriber loss expected in the near future with the price at the moment. 
+Revenue Stability: After an initial post-increase dip, revenue stabilized at $47,816/month, with forecasting models projecting no further significant losses.
 
+💡 Strategic Recommendations
+Targeted Retention: Launch re-engagement campaigns specifically for the 45–54 segment using personalized content recommendations.
+
+Loyalty Rewards: Implement early-access features for the 35–44 segment to protect this high-value core.
+
+Predictive Monitoring: Use monthly engagement hours as a Leading Indicator—flagging users whose watch time drops 20% below their historical average for proactive outreach.
