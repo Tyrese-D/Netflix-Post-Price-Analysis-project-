@@ -64,13 +64,36 @@ Using SQL, I moved the cleaned data into the warehouse and validated the busines
 
 
 📈 Key Findings & Business Insights
-Engagement Resilience: Subscribers who stayed did not reduce their usage; Average Content Hours remained stable at ~500 hours/month, signaling high brand value.
+Engagement Stability (The "Value" Check)
+Key Finding: Despite the price increase, the Average Content Hours Watched remained consistently high, hovering around 500 hours per user.
 
-Loyalty Leaders: The 35–44 age segment emerged as the most loyal and highly engaged group.
+Analysis: This indicates that the perceived value of the content library successfully offset the cost increase for the majority of the active user base. The stable trend line suggests that "High-Engagement" users are inelastic—meaning they are unlikely to cancel because the service is deeply integrated into their daily habits.
 
-At-Risk Segment: The 45–54 age group showed the lowest engagement post-increase, representing the highest churn risk for future cycles.
+2. Market Share & Volume (The "Exposure" Check)
+Key Finding: The Standard Plan accounts for over 8.2 million hours of consumption, nearly double that of the Basic and Premium tiers.
 
-Revenue Stability: After an initial post-increase dip, revenue stabilized at $47,816/month, with forecasting models projecting no further significant losses.
+Analysis: This plan is the "backbone" of your revenue. Any churn detected in this specific group is a high-priority threat because it represents the largest volume of platform activity. From a business perspective, the Standard tier is where retention efforts will have the highest ROI.
+
+3. Future Revenue Outlook (The "Risk" Check)
+Key Finding: While the revenue forecast predicts a plateau at $47,816, the 95% Confidence Interval shows a significant "downside risk" shaded area.
+
+Analysis: The model suggests that while the initial price hike boosted revenue, we are entering a phase of uncertainty. If the churn trends identified in our segments are not addressed, the business could see a revenue dip toward the lower bound of that shaded interval by late 2025.
+
+4. Segmented Churn Risk (The "Data Mining" Insight)
+Key Finding: Churn risk is not uniform. The Under 18 demographic shows a 100% risk intensity across all plan types, and Premium users aged 35–44 show high sensitivity.
+
+Analysis: This is the most critical finding for your research question. It proves that:
+
+Younger users are highly price-sensitive and are the most likely to cancel or "account hop."
+
+Premium users (35–44) may feel the "price-to-value" ratio is thinning, as they exhibit higher churn than their peers on cheaper plans.
+
+The "Big Picture" Presentation Conclusion
+Our research confirms that while Netflix maintains high overall engagement, the price increase has created pockets of vulnerability. Specifically, the Standard plan's massive volume is safe for now, but the high churn risk among younger demographics and mid-life Premium users threatens our long-term revenue stability. To mitigate future cancellations, I propose targeted retention strategies for these high-intensity risk segments
+
+
+
+
 
 💡 Strategic Recommendations
 Targeted Retention: Launch re-engagement campaigns specifically for the 45–54 segment using personalized content recommendations.
