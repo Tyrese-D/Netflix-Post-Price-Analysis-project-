@@ -2,8 +2,9 @@ This project evaluates the impact of Netflix’s 2024 price increases on user be
 
 Core Question: How did the Netflix subscription price increase impact subscriber retention and engagement across different customer groups — and will customers continue to cancel in the future?
 
-`[Live Interactive Dashboard](https://public.tableau.com/app/profile/tyrese.dieudonne/viz/NetflixPostPriceIncreaseanalysis/Dashboard1?publish=yes)
-<img width="1489" height="828" alt="Screenshot 2026-04-27 at 2 56 40 AM" src="https://github.com/user-attachments/assets/edf505c8-c0e0-4fbc-8711-6ca021814b69" />
+`[Live Interactive Dashboard](https://public.tableau.com/app/profile/tyrese.dieudonne/viz/NetflixPriceImpactSubscriberChurnRententionAnalysis/Dashboard2)
+<img width="1920" height="1080" alt="Screenshot 2026-04-27 at 9 36 14 PM" src="https://github.com/user-attachments/assets/111c4661-536e-4a95-b9fa-a3d69840e2e6" />
+
 
 
 ## 🗂️ Table of Contents
